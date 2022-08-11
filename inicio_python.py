@@ -137,3 +137,22 @@ numero = random.randint(0, 10);
 #     print(a/b)
 # except:
 #     print("Falha ao realizar a operação, contate o administrador do sistema")
+
+
+############### L I S T       C O M P R E H E N S I O N ##########################
+x = [1,2,3,4,5]
+y = []
+
+for i in x:
+    y.append(i**2) #Eleva ao quadrado e adiciona a lista Y
+
+print(x)
+print(y)
+
+#[valor_a_adicionar laço condição]    
+y = [i**2 for i in x] #Está sem condição, faz o mesmo que o laço de cima
+y = [i**2 for i in x if i%2==i] #Está com condição de inserir somente os impares
+
+############## L I S T       E N U M E R A T E #######################
+lista = ["abacate", "bola", "cachorro"]
+
