@@ -146,13 +146,50 @@ y = []
 for i in x:
     y.append(i**2) #Eleva ao quadrado e adiciona a lista Y
 
-print(x)
-print(y)
+# print(x)
+# print(y)
 
-#[valor_a_adicionar laço condição]    
-y = [i**2 for i in x] #Está sem condição, faz o mesmo que o laço de cima
-y = [i**2 for i in x if i%2==i] #Está com condição de inserir somente os impares
+# #[valor_a_adicionar laço condição]    
+# y = [i**2 for i in x] #Está sem condição, faz o mesmo que o laço de cima
+# y = [i**2 for i in x if i%2==1] #Está com condição de inserir somente os impares
 
-############## L I S T       E N U M E R A T E #######################
+# print(x)
+# print(y)
+
+############## F U N Ç Ã O       E N U M E R A T E #######################
 lista = ["abacate", "bola", "cachorro"]
 
+# for i, nome in enumerate(lista):
+#     print(i, nome)
+
+#################### F U N Ç Ã O     M A P  ######################
+def dobro(x):
+    return x*2
+
+valor = [1,2,3,4,5]
+
+valor_dobrado = map(dobro, valor) #Aplica a função dobro em cada um dos elementos da lista
+
+valor_dobrado = list(valor_dobrado) #Converte o retorno da função MAP para list, já que ela retorna um objeto
+# print(valor_dobrado);
+
+########################## F U N Ç Ã O      R E D U C E #######################
+from functools import reduce ##Importando função reduce
+
+def soma(x,y):
+    return x+y
+
+lista = [1,2,3,5,10,20]
+
+
+soma = reduce(soma, lista)#Percorre cada elemento da lista vazendo uma soma
+print(soma)
+
+
+###################### F U N Ç Ã O     Z I P #######################
+lista1 = [1,2,3,4,5]
+lista2 = ["abacate", "bola", "cachorro", "dinheiro", "elefante"]
+lista3 = ["R$2,00", "R$5,00", "R$", "R$", "R$"]
+
+for numero, nome, valor in zip(lista1, lista2, lista3):
+    print(numero, nome, valor)
