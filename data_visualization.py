@@ -80,12 +80,39 @@ y2 = [1, 6, 10, 14, 18]
 # Os círculos representam os outlier (valores que destoam muito dos outros valores apresentados).
 
 
-vetor = []
+# vetor = []
 
-for i in range(100):
-    numero_aleatorio = random.randint(0,50)
-    vetor.append(numero_aleatorio)
+# for i in range(100):
+#     numero_aleatorio = random.randint(0,50)
+#     vetor.append(numero_aleatorio)
 
-plt.boxplot(vetor)
-plt.title("Boxplot")
-plt.show()
+# plt.boxplot(vetor)
+# plt.title("Boxplot")
+# plt.show()
+
+entrada = open("human.fasta").read()
+saida = open("human.html","w")
+
+cont = {}
+
+for i in ['A', 'T', 'C', 'G']:
+    for j in ['A', 'T', 'C', 'G']:
+        cont[i+j] = 0
+
+entrada = entrada.replace("\n","")
+
+for k in range(len(entrada)-1):
+    cont[entrada[k]+entrada[k+1]] += 1
+
+# print(cont)
+
+# H T M L
+
+i = 1
+for k in cont:
+    transparencia = cont[k]/max(cont.values())
+    saida.write("<div style='width:100px; border:1px solid #111; color:#fff; height:100px; float:left; background-color:rgba(0,0,0, "+str(transparencia)+"')>"+k+"</div>")
+    if i%4 == 0:
+        saida.write("<div style='clear:both'></div>")
+    i+=1
+saida.close()

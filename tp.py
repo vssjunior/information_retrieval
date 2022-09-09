@@ -2,6 +2,9 @@ import requests
 from io import StringIO
 import pandas as pd
 
+def die(error_message):
+    raise Exception(error_message)
+
 res = requests.get('https://raw.githubusercontent.com/brmson/dataset-sts/master/data/sts/sick2014/SICK_train.txt')
 # create dataframe
 data = pd.read_csv(StringIO(res.text), sep='\t')
@@ -17,8 +20,9 @@ sentences[:5]
 sentences = data['sentence_A'].tolist()
 sentence_b = data['sentence_B'].tolist()
 sentences.extend(sentence_b)  # merge them
-len(set(sentences))  # together we have ~4.5K unique sentences
+# print(len(set(sentences)))  # together we have ~4.5K unique sentences
 
+#This isn't a particularly large number, so let's pull in a few more similar datasets.0
 urls = [
     'https://raw.githubusercontent.com/brmson/dataset-sts/master/data/sts/semeval-sts/2012/MSRpar.train.tsv',
     'https://raw.githubusercontent.com/brmson/dataset-sts/master/data/sts/semeval-sts/2012/MSRpar.test.tsv',
@@ -38,14 +42,16 @@ for url in urls:
     sentences.extend(data[1].tolist())
     sentences.extend(data[2].tolist())
 
-len(set(sentences))
+# print(len(set(sentences))) # together we have ~14.5K unique sentences
 
 # remove duplicates and NaN
 sentences = [word for word in list(set(sentences)) if type(word) is str]
+# print(sentences)
 
 from sentence_transformers import SentenceTransformer
 # initialize sentence transformer model
 model = SentenceTransformer('bert-base-nli-mean-tokens')
 # create sentence embeddings
 sentence_embeddings = model.encode(sentences)
-sentence_embeddings.shape
+print(sentence_embeddings.shape)
+# die("")
